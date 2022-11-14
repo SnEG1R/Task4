@@ -1,9 +1,10 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Identity;
 
 namespace Task4.Domain;
 
 [Table("user")]
-public class User
+public class User : IdentityUser
 {
     public long Id { get; set; }
     public string Name { get; set; }

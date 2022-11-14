@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebMVC.Controllers;
+namespace Task4.MVC.Controllers;
 
 public class HomeController : Controller
 {
@@ -8,4 +8,4 @@ public class HomeController : Controller
     {
         return View();
     }
-}
+}   

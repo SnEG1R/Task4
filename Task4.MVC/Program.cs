@@ -18,6 +18,11 @@ builder.Services.AddAutoMapper(config =>
     config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
 });
 
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.LoginPath = "/Registration/Index";
+});
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
@@ -36,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Registration}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

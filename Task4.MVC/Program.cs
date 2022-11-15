@@ -1,13 +1,23 @@
+using System.Reflection;
+using Task4.Application;
+using Task4.Application.Common.Mappings;
+using Task4.Application.Interfaces;
 using Task4.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddApplication();
 builder.Services.AddPersistence(configuration);
 
+builder.Services.AddAutoMapper(config =>
+{
+    config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
+    config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
+});
+
 var app = builder.Build();
-using var scope = app.Services.CreateScope();
 
 if (!app.Environment.IsDevelopment())
 {

@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Task4.Persistence\Task4.Persistence.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    </ItemGroup>
+
 </Project>

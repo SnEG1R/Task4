@@ -7,7 +7,8 @@ using Task4.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews()
+    .AddRazorRuntimeCompilation();
 builder.Services.AddApplication();
 builder.Services.AddPersistence(configuration);
 
@@ -15,6 +16,11 @@ builder.Services.AddAutoMapper(config =>
 {
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
     config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
+});
+
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.LoginPath = "/Registration/Index";
 });
 
 var app = builder.Build();

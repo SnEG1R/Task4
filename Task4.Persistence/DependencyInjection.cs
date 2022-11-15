@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,7 +18,17 @@ public static class DependencyInjection
             config.UseNpgsql(configuration["ConnectionStrings:DefaultConnection"]);
         });
 
-        services.AddIdentityCore<User>()
+        services.AddIdentity<User, IdentityRole<long>>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequiredLength = 1;
+                options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedAccount = true;
+            })
             .AddEntityFrameworkStores<ApplicationContext>();
 
         services.AddScoped<IApplicationContext, ApplicationContext>();

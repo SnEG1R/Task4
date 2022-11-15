@@ -1,0 +1,52 @@
+@model RegistrationVm
+
+<link rel="stylesheet" href="css/registration/registration.css">
+
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration</h3>
+
+                        <form asp-controller="Registration" asp-action="Index" class="px-md-2">
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="name">Name</label>
+                                <input asp-for="Name" type="text" id="name" class="form-control"/>
+                                <span asp-validation-for="Name" style="color: #ff3050"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="email">Email</label>
+                                <input asp-for="Email" type="text" id="email" class="form-control"/>
+                                <span asp-validation-for="Email" style="color: #ff3050"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password</label>
+                                <input asp-for="Password" type="text" id="password" class="form-control"/>
+                                <span asp-validation-for="Password" style="color: #ff3050"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="confirm-password">Confirm password</label>
+                                <input asp-for="ConfirmPassword" type="text" id="confirm-password" class="form-control"/>
+                                <span asp-validation-for="ConfirmPassword" style="color: #ff3050"></span>
+                                @Html.ValidationMessage("user-exist", new
+                                {
+                                    style = "color: #ff3050"
+                                })
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

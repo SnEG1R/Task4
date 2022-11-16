@@ -23,7 +23,7 @@ public class RegistrationController : Controller
     {
         return View();
     }
-    
+
     [HttpPost]
     public async Task<IActionResult> Index(RegistrationVm model)
     {
@@ -32,9 +32,11 @@ public class RegistrationController : Controller
 
         var command = _mapper.Map<CreateUserCommand>(model);
         command.ModelState = ModelState;
-        
+
         var modelState = await _mediator.Send(command);
 
-        return !modelState.IsValid ? View(model) : View();
+        return !modelState.IsValid
+            ? View(model)
+            : RedirectToAction("Index", "Main");
     }
 }

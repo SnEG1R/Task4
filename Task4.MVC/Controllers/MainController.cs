@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task4.Application.Common.Constants;
 using Task4.Application.CQs.User.Commands.Block;
+using Task4.Application.CQs.User.Commands.Unblock;
 using Task4.Application.CQs.User.Queries.GetListUser;
 
 namespace Task4.MVC.Controllers;
@@ -37,6 +38,15 @@ public class MainController : Controller
         };
         await _mediator.Send(command);
 
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Unblock([FromBody] IEnumerable<long> ids)
+    {
+        var command = new UnblockUserCommand() { UserIds = ids };
+        await _mediator.Send(command);
+        
         return RedirectToAction(nameof(Index));
     }
 }

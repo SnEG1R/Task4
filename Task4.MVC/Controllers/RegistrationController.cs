@@ -37,6 +37,6 @@ public class RegistrationController : Controller
 
         return !modelState.IsValid
             ? View(model)
-            : RedirectToAction("Index", "Main");
+            : RedirectToAction("Index", "User");
     }
 }

@@ -22,6 +22,7 @@ public class GetListUserQueryHandler : IRequestHandler<GetListUserQuery, GetList
     {
         var users = await _context.Users
             .ProjectTo<UserDto>(_mapper.ConfigurationProvider)
+            .OrderBy(u => u.Id)
             .ToListAsync(cancellationToken);
 
         return new GetListUserVm() { Users = users };

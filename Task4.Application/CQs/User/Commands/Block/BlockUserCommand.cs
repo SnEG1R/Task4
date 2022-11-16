@@ -5,7 +5,7 @@ namespace Task4.Application.CQs.User.Commands.Block;
 
 public class BlockUserCommand : IRequest
 {
-    public IEnumerable<long> Ids { get; set; }
+    public IEnumerable<long> UserIds { get; set; }
     
     public ClaimsPrincipal ClaimsPrincipal { get; set; }
 }

@@ -22,7 +22,7 @@ public class BlockUserCommandHandler : IRequestHandler<BlockUserCommand, Unit>
         CancellationToken cancellationToken)
     {
         var users = _context.Users
-            .Where(u => request.Ids
+            .Where(u => request.UserIds
                 .Contains(u.Id));
 
         var currentUserId = Convert.ToInt64(request.ClaimsPrincipal

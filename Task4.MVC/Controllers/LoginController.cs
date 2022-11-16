@@ -35,6 +35,6 @@ public class LoginController : Controller
 
         return !modelState.IsValid
             ? View(model)
-            : RedirectToAction("Index", "Main");
+            : RedirectToAction("Index", "User");
     }
 }

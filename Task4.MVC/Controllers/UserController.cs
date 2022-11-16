@@ -11,12 +11,12 @@ using Task4.Domain;
 namespace Task4.MVC.Controllers;
 
 [Authorize]
-public class MainController : Controller
+public class UserController : Controller
 {
     private readonly SignInManager<User> _signInManager;
     private readonly IMediator _mediator;
 
-    public MainController(IMediator mediator, SignInManager<User> signInManager)
+    public UserController(IMediator mediator, SignInManager<User> signInManager)
     {
         _mediator = mediator;
         _signInManager = signInManager;
@@ -36,7 +36,7 @@ public class MainController : Controller
     {
         var command = new BlockUserCommand()
         {
-            Ids = ids,
+            UserIds = ids,
             ClaimsPrincipal = User
         };
         await _mediator.Send(command);
@@ -56,7 +56,11 @@ public class MainController : Controller
     [HttpPost]
     public async Task<IActionResult> Delete([FromBody] IEnumerable<long> ids)
     {
-        var command = new DeleteUserCommand() { UserIds = ids };
+        var command = new DeleteUserCommand
+        {
+            UserIds = ids,
+            ClaimsPrincipal = User
+        };
         await _mediator.Send(command);
 
         return RedirectToAction(nameof(Index));

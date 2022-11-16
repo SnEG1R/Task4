@@ -1,6 +1,8 @@
+using System.Security.Claims;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Task4.Application.Common.Constants;
 
 namespace Task4.Application.CQs.User.Queries.Login;
 
@@ -27,6 +29,13 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, ModelStateDictionar
             return request.ModelState;
         }
 
+        if (user.Status == UserStatuses.Block)
+        {
+            request.ModelState.AddModelError("user-valid", 
+                "This user is blocked");
+            return request.ModelState;
+        }
+
         var isCorrectPassword = await _userManager.CheckPasswordAsync(user, request.Password);
         if (!isCorrectPassword)
         {
@@ -35,8 +44,8 @@ public class LoginQueryHandler : IRequestHandler<LoginQuery, ModelStateDictionar
             return request.ModelState;
         }
 
-        await _signInManager.SignInAsync(user, false);
-        
+        await _signInManager.SignInAsync(user, true);
+
         return request.ModelState;
     }
 }

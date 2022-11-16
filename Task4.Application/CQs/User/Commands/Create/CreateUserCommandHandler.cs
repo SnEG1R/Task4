@@ -2,6 +2,7 @@ using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Task4.Application.Common.Constants;
 
 namespace Task4.Application.CQs.User.Commands.Create;
 
@@ -32,7 +33,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Model
         var user = _mapper.Map<Domain.User>(request);
         user.DateRegistration = DateTime.UtcNow;
         user.DateLastLogin = DateTime.UtcNow;
-        user.Status = "";
+        user.Status = UserStatuses.Unblock;
 
         await _userManager.CreateAsync(user, request.Password);
         await _signInManager.SignInAsync(user, true);

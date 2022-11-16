@@ -5,19 +5,19 @@ let deleteBtn = document.getElementById('delete-btn');
 blockBtn.addEventListener('click', async () => {
     let selectedIds = getToggleUserIds().map(item => +item);
 
-    await SendData('/Main/Block', selectedIds);
+    await SendData('/User/Block', selectedIds);
 });
 
 unblockBtn.addEventListener('click', async () => {
     let selectedIds = getToggleUserIds().map(item => +item);
 
-    await SendData('/Main/Unblock', selectedIds);
+    await SendData('/User/Unblock', selectedIds);
 });
 
 deleteBtn.addEventListener('click', async () => {
     let selectedIds = getToggleUserIds().map(item => +item);
 
-    await SendData('/Main/Delete', selectedIds);
+    await SendData('/User/Delete', selectedIds);
 });
 
 async function SendData(input, data) {

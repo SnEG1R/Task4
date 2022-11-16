@@ -30,7 +30,7 @@
                 Delete
             </button>
             
-            <a asp-controller="Main" asp-action="Logout" type="button" class="logout-btn btn btn-dark position-absolute end-0">
+            <a asp-controller="User" asp-action="Logout" type="button" class="logout-btn btn btn-dark position-absolute end-0">
                 Logout
             </a>
         </div>
@@ -55,11 +55,11 @@
     @foreach (var user in Model.Users)
     {
         <tr>
-            <th scope="row">
+            <td>
                 <input class="checkbox-table" type="checkbox">
                 <input type="hidden" value="@user.Id">
-            </th>
-            <th scope="row">@user.Id</th>
+            </td>
+            <td>@user.Id</td>
             <td>@user.Name</td>
             <td>@user.Email</td>
             <td>@user.DateRegistration.ToShortDateString()</td>

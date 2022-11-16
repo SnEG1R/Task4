@@ -23,9 +23,9 @@ public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, Unit>
         var users = _context.Users
             .Where(u => request.UserIds
                 .Contains(u.Id));
-        
+
         var currentUserId = Convert.ToInt64(request.ClaimsPrincipal
-            .FindFirst(ClaimTypes.NameIdentifier)?.Value);
+            .FindFirstValue(ClaimTypes.NameIdentifier));
 
         foreach (var user in users)
         {

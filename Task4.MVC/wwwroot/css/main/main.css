@@ -1,0 +1,16 @@
+.table {
+    margin-top: 20px;
+}
+
+button svg {
+    margin-right: 7px;
+}
+
+button {
+    margin-right: 25px;
+}
+
+input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+}

@@ -7,10 +7,12 @@ using Task4.Application.CQs.User.Commands.Delete;
 using Task4.Application.CQs.User.Commands.Unblock;
 using Task4.Application.CQs.User.Queries.GetListUser;
 using Task4.Domain;
+using Task4.MVC.Filters;
 
 namespace Task4.MVC.Controllers;
 
 [Authorize]
+[ServiceFilter(typeof(UserValidationAttribute))]
 public class UserController : Controller
 {
     private readonly SignInManager<User> _signInManager;
@@ -27,7 +29,7 @@ public class UserController : Controller
     {
         var query = new GetListUserQuery();
         var users = await _mediator.Send(query);
-        
+
         return View(users);
     }
 
@@ -70,7 +72,7 @@ public class UserController : Controller
     public async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
-        
+
         return RedirectToAction(nameof(Index));
     }
 }

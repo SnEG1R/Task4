@@ -1,7 +1,9 @@
 using System.Reflection;
+using Microsoft.AspNetCore.Identity;
 using Task4.Application;
 using Task4.Application.Common.Mappings;
 using Task4.Application.Interfaces;
+using Task4.MVC.Filters;
 using Task4.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,8 @@ builder.Services.AddAutoMapper(config =>
     config.AddProfile(new AssemblyMappingProfile(Assembly.GetExecutingAssembly()));
     config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
 });
+
+builder.Services.AddScoped<UserValidationAttribute>();
 
 builder.Services.ConfigureApplicationCookie(option =>
 {

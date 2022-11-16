@@ -35,7 +35,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Model
         user.Status = "";
 
         await _userManager.CreateAsync(user, request.Password);
-        await _signInManager.SignInAsync(user, false);
+        await _signInManager.SignInAsync(user, true);
 
         return request.ModelState;
     }

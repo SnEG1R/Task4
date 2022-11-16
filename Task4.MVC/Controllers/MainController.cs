@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Task4.Application.Common.Constants;
 using Task4.Application.CQs.User.Commands.Block;
+using Task4.Application.CQs.User.Commands.Delete;
 using Task4.Application.CQs.User.Commands.Unblock;
 using Task4.Application.CQs.User.Queries.GetListUser;
 
@@ -46,7 +47,16 @@ public class MainController : Controller
     {
         var command = new UnblockUserCommand() { UserIds = ids };
         await _mediator.Send(command);
-        
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete([FromBody] IEnumerable<long> ids)
+    {
+        var command = new DeleteUserCommand() { UserIds = ids };
+        await _mediator.Send(command);
+
         return RedirectToAction(nameof(Index));
     }
 }

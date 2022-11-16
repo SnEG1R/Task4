@@ -18,6 +18,14 @@ unblockBtn.addEventListener('click', async () => {
     document.location.reload();
 });
 
+deleteBtn.addEventListener('click', async () => {
+    let selectedIds = getToggleUserIds().map(item => +item);
+
+    await SendData('/Main/Delete', selectedIds);
+
+    document.location.reload();
+});
+
 async function SendData(input, data) {
     await fetch(input, {
         method: 'POST',

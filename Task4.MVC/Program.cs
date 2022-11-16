@@ -20,7 +20,7 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.ConfigureApplicationCookie(option =>
 {
-    option.LoginPath = "/Registration/Index";
+    option.LoginPath = "/Login/Index";
 });
 
 var app = builder.Build();

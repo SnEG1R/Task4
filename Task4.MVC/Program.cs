@@ -20,7 +20,7 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.ConfigureApplicationCookie(option =>
 {
-    option.LoginPath = "/Registration/Index";
+    option.LoginPath = "/Login/Index";
 });
 
 var app = builder.Build();
@@ -41,6 +41,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Main}/{action=Index}/{id?}");
 
 app.Run();

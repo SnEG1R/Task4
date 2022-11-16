@@ -33,6 +33,8 @@ public class LoginController : Controller
 
         var modelState = await _mediator.Send(query);
 
-        return !modelState.IsValid ? View(model) : View();
+        return !modelState.IsValid
+            ? View(model)
+            : RedirectToAction("Index", "Main");
     }
 }

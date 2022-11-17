@@ -14,11 +14,14 @@ public static class DependencyInjection
         IConfiguration configuration)
     {
         var connectionString = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")
-                               == "Development"
-            ? configuration["DbConnection"]
-            : GetConnectionString();
+                               == "Production"
+            ? GetConnectionString()
+            : configuration["ConnectionStrings:DefaultConnection"];
 
-        services.AddDbContext<ApplicationDbContext>(config => { config.UseNpgsql(connectionString); });
+        services.AddDbContext<ApplicationDbContext>(config =>
+        {
+            config.UseNpgsql(connectionString);
+        });
 
         services.AddIdentity<User, IdentityRole<long>>(options =>
             {

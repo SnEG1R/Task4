@@ -12,7 +12,7 @@ using Task4.MVC.Filters;
 namespace Task4.MVC.Controllers;
 
 [Authorize]
-[ServiceFilter(typeof(UserValidationAttribute))]
+[ServiceFilter(typeof(UserActionValidationAttribute))]
 public class UserController : Controller
 {
     private readonly SignInManager<User> _signInManager;

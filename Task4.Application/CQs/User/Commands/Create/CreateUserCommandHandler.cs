@@ -12,7 +12,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Model
     private readonly SignInManager<Domain.User> _signInManager;
     private readonly IMapper _mapper;
 
-    public CreateUserCommandHandler(UserManager<Domain.User> userManager, IMapper mapper, 
+    public CreateUserCommandHandler(UserManager<Domain.User> userManager, IMapper mapper,
         SignInManager<Domain.User> signInManager)
     {
         _userManager = userManager;
@@ -33,6 +33,7 @@ public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, Model
         var user = _mapper.Map<Domain.User>(request);
         user.DateRegistration = DateTime.UtcNow;
         user.DateLastLogin = DateTime.UtcNow;
+        user.UserName = Guid.NewGuid().ToString();
         user.Status = UserStatuses.Unblock;
 
         await _userManager.CreateAsync(user, request.Password);

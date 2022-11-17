@@ -21,7 +21,7 @@ public class UserDto : IMapWith<Domain.User>
                     c.MapFrom(u => u.Id))
             .ForMember(u => u.Name,
                 c =>
-                    c.MapFrom(u => u.UserName))
+                    c.MapFrom(u => u.Name))
             .ForMember(u => u.Email,
                 c =>
                     c.MapFrom(u => u.Email))

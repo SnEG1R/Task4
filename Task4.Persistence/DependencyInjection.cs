@@ -13,7 +13,7 @@ public static class DependencyInjection
     public static IServiceCollection AddPersistence(this IServiceCollection services,
         IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationContext>(config =>
+        services.AddDbContext<ApplicationDbContext>(config =>
         {
             config.UseNpgsql(configuration["ConnectionStrings:DefaultConnection"]);
         });
@@ -27,11 +27,11 @@ public static class DependencyInjection
                 options.Password.RequiredLength = 1;
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedAccount = false;
             })
-            .AddEntityFrameworkStores<ApplicationContext>();
+            .AddEntityFrameworkStores<ApplicationDbContext>();
 
-        services.AddScoped<IApplicationContext, ApplicationContext>();
+        services.AddScoped<IApplicationContext, ApplicationDbContext>();
 
         return services;
     }

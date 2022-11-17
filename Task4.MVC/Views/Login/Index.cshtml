@@ -1,0 +1,41 @@
+@model LoginVm
+
+<link rel="stylesheet" href="~/css/login/login.css">
+
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+    <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-lg-8 col-xl-6">
+                <div class="card rounded-3">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Login</h3>
+
+                        <form asp-controller="Login" asp-action="Index" class="px-md-2">
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="email">Email</label>
+                                <input asp-for="Email" type="email" id="email" class="form-control"/>
+                                <span asp-validation-for="Email" style="color: #ff3050"></span>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="password">Password</label>
+                                <input asp-for="Password" type="password" id="password" class="form-control"/>
+                                <span asp-validation-for="Password" style="color: #ff3050"></span>
+                                @Html.ValidationMessage("user-valid", new
+                                {
+                                    style = "color: #ff3050"
+                                })
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button>
+
+                            <a asp-controller="Registration" asp-action="Index" class="btn-lg mb-1 position-absolute">Registration</a>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

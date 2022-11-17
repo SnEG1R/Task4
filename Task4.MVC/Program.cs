@@ -23,7 +23,7 @@ builder.Services.AddAutoMapper(config =>
     config.AddProfile(new AssemblyMappingProfile(typeof(IApplicationContext).Assembly));
 });
 
-builder.Services.AddScoped<UserValidationAttribute>();
+builder.Services.AddScoped<UserActionValidationAttribute>();
 
 builder.Services.ConfigureApplicationCookie(option =>
 {

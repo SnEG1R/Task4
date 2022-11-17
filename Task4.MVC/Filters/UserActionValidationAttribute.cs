@@ -10,12 +10,12 @@ using Task4.MVC.Controllers;
 
 namespace Task4.MVC.Filters;
 
-public class UserValidationAttribute : Attribute, IAsyncActionFilter
+public class UserActionValidationAttribute : Attribute, IAsyncActionFilter
 {
     private readonly IMediator _mediator;
     private readonly SignInManager<User> _signInManager;
 
-    public UserValidationAttribute(SignInManager<User> signInManager,
+    public UserActionValidationAttribute(SignInManager<User> signInManager,
         IMediator mediator)
     {
         _signInManager = signInManager;

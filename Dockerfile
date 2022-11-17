@@ -23,4 +23,4 @@ RUN dotnet publish "Task4.MVC.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Task4.MVC.dll"]
+CMD ["dotnet", "Task4.MVC.dll"]

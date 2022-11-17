@@ -1,3 +1,4 @@
+using System.Net;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -24,15 +25,21 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.AddScoped<UserValidationAttribute>();
 
-builder.Services.ConfigureApplicationCookie(option => { option.LoginPath = "/Login/Index"; });
+builder.Services.ConfigureApplicationCookie(option =>
+{
+    option.LoginPath = "/Login/Index";
+});
+
+builder.WebHost.ConfigureKestrel(config =>
+{
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+    {
+        config.Listen(IPAddress.Any, Convert.ToInt32(
+            Environment.GetEnvironmentVariable("PORT")));   
+    }
+});
 
 var app = builder.Build();
-
-using (var scope = app.Services.CreateScope())
-{
-    // scope.ServiceProvider
-        // .GetRequiredService<ApplicationDbContext>().Database.Migrate();
-}
 
 if (!app.Environment.IsDevelopment())
 {

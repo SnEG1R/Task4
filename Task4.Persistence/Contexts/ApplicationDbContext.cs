@@ -6,7 +6,7 @@ using Task4.Domain;
 
 namespace Task4.Persistence.Contexts;
 
-public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<long>, long>,
+public sealed class ApplicationDbContext : IdentityDbContext<User, IdentityRole<long>, long>,
     IApplicationContext
 {
     public DbSet<User> Users { get; set; }
@@ -14,5 +14,6 @@ public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<long>, 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
     {
+        Database.EnsureCreated();
     }
 }

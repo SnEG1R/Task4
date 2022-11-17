@@ -1,10 +1,12 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Task4.Application;
 using Task4.Application.Common.Mappings;
 using Task4.Application.Interfaces;
 using Task4.MVC.Filters;
 using Task4.Persistence;
+using Task4.Persistence.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -22,12 +24,15 @@ builder.Services.AddAutoMapper(config =>
 
 builder.Services.AddScoped<UserValidationAttribute>();
 
-builder.Services.ConfigureApplicationCookie(option =>
-{
-    option.LoginPath = "/Login/Index";
-});
+builder.Services.ConfigureApplicationCookie(option => { option.LoginPath = "/Login/Index"; });
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    // scope.ServiceProvider
+        // .GetRequiredService<ApplicationDbContext>().Database.Migrate();
+}
 
 if (!app.Environment.IsDevelopment())
 {

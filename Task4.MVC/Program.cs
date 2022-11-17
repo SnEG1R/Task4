@@ -1,10 +1,13 @@
+using System.Net;
 using System.Reflection;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Task4.Application;
 using Task4.Application.Common.Mappings;
 using Task4.Application.Interfaces;
 using Task4.MVC.Filters;
 using Task4.Persistence;
+using Task4.Persistence.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -25,6 +28,15 @@ builder.Services.AddScoped<UserValidationAttribute>();
 builder.Services.ConfigureApplicationCookie(option =>
 {
     option.LoginPath = "/Login/Index";
+});
+
+builder.WebHost.ConfigureKestrel(config =>
+{
+    if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+    {
+        config.Listen(IPAddress.Any, Convert.ToInt32(
+            Environment.GetEnvironmentVariable("PORT")));   
+    }
 });
 
 var app = builder.Build();

@@ -16,7 +16,7 @@ public class CreateUserCommand : IRequest<ModelStateDictionary>, IMapWith<Domain
     public void Mapping(Profile profile)
     {
         profile.CreateMap<CreateUserCommand, Domain.User>()
-            .ForMember(u => u.UserName,
+            .ForMember(u => u.Name,
                 c =>
                     c.MapFrom(u => u.Name))
             .ForMember(u => u.Email,

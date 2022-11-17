@@ -9,9 +9,9 @@ using Task4.Persistence.Contexts;
 
 namespace Task4.Persistence.ContextDesignFactories;
 
-public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
+public class ApplicationContextFactory : IDesignTimeDbContextFactory<ApplicationDbContext>
 {
-    public ApplicationContext CreateDbContext(string[] args)
+    public ApplicationDbContext CreateDbContext(string[] args)
     {
         var projectPath = GetSettingsPath();
         
@@ -20,12 +20,12 @@ public class ApplicationContextFactory : IDesignTimeDbContextFactory<Application
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var optionsBuilder = new DbContextOptionsBuilder<ApplicationContext>();
+        var optionsBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
         optionsBuilder.UseNpgsql(configurationBuilder["ConnectionStrings:DefaultConnection"],
             b
                 => b.MigrationsAssembly(NameProjectAssemblies.Persistence));
 
-        return new ApplicationContext(optionsBuilder.Options);
+        return new ApplicationDbContext(optionsBuilder.Options);
     }
 
     private static string GetSettingsPath()
